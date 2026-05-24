@@ -1189,9 +1189,9 @@
             }
             data.timestamp = new Date().toISOString();
 
-            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxCGmUZD-H8dS7794mmObJKrXVeU_8fYeVq2uokefusqBjOB-aXLeN_pZkRXNdmW9qEFw/exec';
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyi2EMlB507u5ZStX2GoYZn8yn2X_tCjUr1kbaS98SIP2dWPPw8mSCFpjOb7twm9u5kOg/exec';
 
-            if (GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbxCGmUZD-H8dS7794mmObJKrXVeU_8fYeVq2uokefusqBjOB-aXLeN_pZkRXNdmW9qEFw/exec') {
+            if (GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbyi2EMlB507u5ZStX2GoYZn8yn2X_tCjUr1kbaS98SIP2dWPPw8mSCFpjOb7twm9u5kOg/exec') {
                 form.style.display = 'none';
                 document.querySelector('.intro-section').style.display = 'none';
                 successMessage.classList.add('visible');
@@ -1200,8 +1200,9 @@
                     submitBtn.disabled = true;
                     submitBtn.textContent = translations[currentLang]['submit-btn-loading'];
                     
-                    const img = new Image();
-                    img.src = GOOGLE_SCRIPT_URL + '?' + new URLSearchParams({data: JSON.stringify(data)}).toString();
+                    const scriptURL = GOOGLE_SCRIPT_URL + '?data=' + encodeURIComponent(JSON.stringify(data));
+                    await fetch(scriptURL, { method: 'GET', mode: 'no-cors' });
+                    await new Promise(resolve => setTimeout(resolve, 2000));
 
                     await new Promise(resolve => setTimeout(resolve, 2000));
 
