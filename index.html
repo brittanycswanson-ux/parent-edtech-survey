@@ -1201,7 +1201,7 @@
                     submitBtn.textContent = translations[currentLang]['submit-btn-loading'];
                     
                     const scriptURL = GOOGLE_SCRIPT_URL + '?data=' + encodeURIComponent(JSON.stringify(data));
-                    await fetch(scriptURL, { method: 'GET', mode: 'no-cors' });
+                    await fetch(scriptURL);
                     await new Promise(resolve => setTimeout(resolve, 2000));
 
                     await new Promise(resolve => setTimeout(resolve, 2000));
